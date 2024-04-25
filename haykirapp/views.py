@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from . import models
+from django.urls import reverse
+from haykirapp.forms import AddTweetForm
 
 # Create your views here.
 
@@ -10,5 +12,19 @@ def listhaykir(request):
 
 def addhaykir(request):
     if request.method == 'POST':
-        print(request.POST["nickname"])
-    return render(request,"haykirapp/addhaykir.html")
+        nickname = request.POST["nickname"]
+        message = request.POST["message"]
+        models.Tweet.objects.create(nickname=nickname,message=message)
+        return redirect(reverse("haykirapp:listhaykir"))
+    else:
+        return render(request,"haykirapp/addhaykir.html")
+
+def addtweetbyform(request):
+    if request.method == 'POST':
+        print(request.POST)
+        
+        return redirect(reverse('haykirapp:listhaykir'))
+    else:
+        form=AddTweetForm()
+        return render(request,'haykirapp/addtweetbyform.html',context={"form":form})
+    
