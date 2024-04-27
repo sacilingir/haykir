@@ -1,11 +1,23 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content%}
-<h2>mesaj ekleme sayfasi..//F ORM</h2>
-<form action="" method="POST">
+<h2>mesaj ekleme sayfasi..//FORM</h2>
+<div class="container tweetform">
+    <form action="" method="POST">
     {% csrf_token %}
     
-    {{form}}
+    
+
+    {%for field in form%}
+
+    <div class="form-control">
+      {{field.label_tag}}
+      {{field}}
+    </div>
+
+    {% endfor %}
+
     <button type="submit" class="btn btn-primary">Mesaj yolla</button>
-  </form>
+    </form>
+</div>
 {%endblock%}
