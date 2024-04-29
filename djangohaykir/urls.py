@@ -19,5 +19,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('haykirapp.urls'))
+    path('',include('haykirapp.urls')),
+    path('login',include('django.contrib.auth.urls'))
+
 ]

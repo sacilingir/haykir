@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if form.errors%}
+<h2>Kullanıcı adı ve şifre eşleşmiyor.Tekrar deneyiniz.</h2>
+{% endif %}
+
+
+{% if user.is_authenticated%}
+<h2>WELCOME {{user.username}}</h2>
+{% else %}
+
+    <form method="POST" action="{% url 'login' %}">
+        <div class="container" style=" padding: 8px; width:50%" >
+        {% csrf_token %}
+        {%for field in form%}
+    
+        <div class="mb-3">
+          {{field.label_tag}}
+          {{field}}
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Tık!</button>
+    </div>
+    </form>
+
+
+ 
+{% endif %}
+
+
+
+
+
+{% endblock %}

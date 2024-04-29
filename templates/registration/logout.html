@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated%}
+<h2>WELCOME {{user.username}}</h2>
+{% else %}
+<form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" class="btn btn-primary">Tık!</button>
+
+</form>
+
+ 
+{% endif %}
+
+
+
+
+
+{% endblock %}
